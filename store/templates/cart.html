@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+Shopping Cart | MiniStore
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">Shopping Cart</h1>
+
+{% if cart_items %}
+
+    {% for item in cart_items %}
+
+        <div class="product-card">
+
+            {% if item.product.image %}
+                <img
+    src="{{ item.product.image.url }}"
+    class="cart-image"
+    alt="{{ item.product.name }}"
+>
+            {% endif %}
+
+            <div class="product-info">
+
+                <h2 class="product-name">
+                    {{ item.product.name }}
+                </h2>
+
+                <p class="price">
+                    ₹{{ item.product.price }}
+                        <p>
+            Quantity:
+
+            <a href="{% url 'decrease_quantity' item.product.id %}">
+                −
+            </a>
+
+            {{ item.quantity }}
+
+            <a href="{% url 'increase_quantity' item.product.id %}">
+                +
+            </a>
+        </p>
+
+                <p>
+                    Subtotal: ₹{{ item.subtotal }}
+                </p>
+
+                <a
+    href="{% url 'remove_from_cart' item.product.id %}"
+    class="btn btn-danger"
+>
+    Remove
+</a>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    <h2>Total: ₹{{ total }}</h2>
+
+{% else %}
+
+    <p>Your cart is empty.</p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'product_list' %}" class="btn btn-secondary">
+    ← Continue Shopping
+</a>
+
+<a href="{% url 'checkout' %}" class="btn btn-secondary">
+   Proceed to Checkout
+</a>
+
+{% endblock %}

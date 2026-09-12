@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmation{% endblock %}
+{% block content %}
+
+<h2>Thank you for your order!</h2>
+<p>Your order has been placed successfully.</p>
+
+<h3>Order #{{ order.id }}</h3>
+<p><strong>Name:</strong> {{ order.name }}</p>
+<p><strong>Email:</strong> {{ order.email }}</p>
+<p><strong>Phone:</strong> {{ order.phone }}</p>
+<p><strong>Address:</strong> {{ order.address }}</p>
+<p><strong>Placed on:</strong> {{ order.created_at }}</p>
+
+<hr>
+
+<h3>Items</h3>
+{% for item in order.items.all %}
+    <div>
+        <p>{{ item.product.name }} — Qty: {{ item.quantity }} — ₹{{ item.price }} each</p>
+        <p>Subtotal: ₹{{ item.subtotal }}</p>
+    </div>
+{% endfor %}
+
+<hr>
+<h3>Total: ₹{{ order.total }}</h3>
+
+<a href="{% url 'product_list' %}">Continue Shopping</a>
+
+{% endblock %}

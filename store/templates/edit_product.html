@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Product | MiniStore
+{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <h1 class="page-title">Edit Product</h1>
+
+    <p class="subtitle">
+        Update the details of {{ product.name }}.
+    </p>
+
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <br>
+
+        <button type="submit" class="btn btn-primary">
+            Update Product
+        </button>
+
+        <a
+            href="{% url 'product_details' product.id %}"
+            class="btn btn-secondary"
+        >
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

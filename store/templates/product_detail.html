@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.name }} | MiniStore
+{% endblock %}
+
+{% block content %}
+
+<div class="detail-card">
+
+    <div>
+        {% if product.image %}
+            <img
+                src="{{ product.image.url }}"
+                class="detail-image"
+                alt="{{ product.name }}"
+            >
+
+        {% endif %}
+    </div>
+
+
+    <div>
+
+        <h1 class="page-title">
+            {{ product.name }}
+        </h1>
+
+        <div class="detail-price">
+            ₹{{ product.price }}
+        </div>
+
+        <span class="category">
+            {{ product.category }}
+        </span>
+
+        <p class="detail-description">
+            {{ product.description }}
+        </p>
+
+        <p class="stock">
+            <strong>Available Stock:</strong>
+            {{ product.stock }}
+        </p>
+
+        <p>
+            <strong>Weight:</strong>
+            {{ product.weight }} kg
+        </p>
+
+
+        <br>
+        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">
+    🛒 Add to Cart
+</a>
+
+        <a
+            href="{% url 'edit_product' product.id %}"
+            class="btn btn-primary"
+        >
+            Edit Product
+        </a>
+
+        <a
+            href="{% url 'delete_product' product.id %}"
+            class="btn btn-danger"
+        >
+            Delete
+        </a>
+
+        <br><br>
+
+        <a
+            href="{% url 'product_list' %}"
+            class="btn btn-secondary"
+        >
+            ← Back to Products
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Mini Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'products/style.css' %}">
+</head>
+
+<body>
+    <h1>Mini Store</h1>
+
+    <hr>
+
+    <div class="nav-links">
+        <a href="{% url 'product_list' %}">Products</a>
+        <a href="{% url 'add_product' %}">Add Product</a>
+        <a href="{% url 'cart' %}">🛒 Cart {{ cart_count }}</a>
+    </div>
+
+    <hr>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

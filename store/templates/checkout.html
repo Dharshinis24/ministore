@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h2>CheckOut</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Name:</label>
+    <input type="text" name="name" required><br><br>
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
+    <label>Phone:</label>
+    <input type="tel" name="phone" required><br><br>
+    <label>Address:</label><br>
+    <textarea name="address" rows="4" required></textarea><br><br>
+    {% for item in products %}
+    <div>
+        <h3>{{ item.product.name }}</h3>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>Subtotal: ₹{{ item.subtotal }}</p>
+    </div>
+{% endfor %}
+
+<hr>
+
+<h3>Total: ₹{{ total }}</h3>
+
+<button type="submit" class="btn btn-secondary">Place Order</button>
+
+</form>
+{% endblock %}
+
